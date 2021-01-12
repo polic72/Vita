@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 
 using Stonis;
-using Vita.Miscellaneous;
 using Vita.Organism;
 
 namespace Vita
