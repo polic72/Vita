@@ -10,7 +10,6 @@ using System.Threading;
 using Stonis;
 using Vita.Miscellaneous;
 using Vita.Organism;
-using Vita.Graphics;
 
 namespace Vita
 {
