@@ -9,7 +9,7 @@ using Stonis;
 
 namespace Vita.Graphics
 {
-    public interface IDisplayable
+    public interface IPhysical
     {
         XYZ GetPosition();
 

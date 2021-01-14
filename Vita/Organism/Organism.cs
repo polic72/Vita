@@ -11,6 +11,10 @@ namespace Vita.Organism
 {
     public class Organism
     {
+        public static readonly double MIN_SIZE = .1;
+        public static readonly double MAX_SIZE = 10;
+
+
         #region Properties
 
         public Name Name { get; }

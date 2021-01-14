@@ -11,7 +11,7 @@ using Stonis;
 
 namespace Vita.Object_
 {
-    public class Object : IDisplayable
+    public class Object : IPhysical
     {
         public XYZ position;
 

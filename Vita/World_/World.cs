@@ -20,7 +20,7 @@ namespace Vita.World_
         public int WorldSize_Y { get; }
         public int WorldSize_Z { get; }
 
-        private List<IDisplayable> drawables;
+        private List<IPhysical> drawables;
 
 
         public World(int worldSize_X, int worldSize_Y, int worldSize_Z)
@@ -29,7 +29,7 @@ namespace Vita.World_
             WorldSize_Y = worldSize_Y;
             WorldSize_Z = worldSize_Z;
 
-            drawables = new List<IDisplayable>();
+            drawables = new List<IPhysical>();
 
             drawables.Add(new Object(new XYZ(5, 15, 0)));
             drawables.Add(new Object(new XYZ(100, 150, 0)));
