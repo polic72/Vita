@@ -72,7 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Miscellaneous\Helpers.cs" />
-    <Compile Include="Graphics\IPhysical.cs" />
+    <Compile Include="Miscellaneous\IPhysical.cs" />
     <Compile Include="Object_\Object.cs" />
     <Compile Include="Posibile V2\Body Parts\Body.cs" />
     <Compile Include="Posibile V2\Body Parts\Joint.cs" />
