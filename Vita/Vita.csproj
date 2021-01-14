@@ -71,13 +71,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Main Window.xaml.cs">
-      <DependentUpon>Main Window.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Miscellaneous\Helpers.cs" />
     <Compile Include="Graphics\IDisplayable.cs" />
-    <Compile Include="Miscellaneous\Shape.cs" />
-    <Compile Include="Miscellaneous\XYZ.cs" />
     <Compile Include="Object_\Object.cs" />
     <Compile Include="Posibile V2\Body Parts\Body.cs" />
     <Compile Include="Posibile V2\Body Parts\Joint.cs" />
@@ -97,11 +92,5 @@
     <Content Include="Miscellaneous\Syllables.txt" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Page Include="Graphics\Main Window.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

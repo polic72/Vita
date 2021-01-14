@@ -22,8 +22,6 @@ namespace Vita.World_
 
         private List<IDisplayable> drawables;
 
-        private Main_Window window;
-
 
         public World(int worldSize_X, int worldSize_Y, int worldSize_Z)
         {
