@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vita.Organism.Body_Parts
+namespace Vita.Organism_.Body_Parts
 {
     public abstract class Tip
     {

@@ -9,7 +9,7 @@ using Stonis;
 using Vita.Miscellaneous;
 
 
-namespace Vita.Organism
+namespace Vita.Organism_
 {
     /// <summary>
     /// An organism.
@@ -94,6 +94,8 @@ namespace Vita.Organism
         public void OnTick()
         {
             position += velocity;
+
+            Console.WriteLine(Name + ": " + position);
         }
     }
 }

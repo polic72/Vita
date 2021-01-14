@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Vita.Organism
+namespace Vita.Organism_
 {
     /// <summary>
     /// The DNA of an organism.

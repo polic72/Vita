@@ -79,10 +79,15 @@
     <Compile Include="Posibile V2\Body Parts\Limb.cs" />
     <Compile Include="Posibile V2\Body Parts\Sensor.cs" />
     <Compile Include="Posibile V2\Body Parts\Tip.cs" />
-    <Compile Include="Organism\DNA.cs" />
-    <Compile Include="Organism\Organism.cs" />
+    <Compile Include="Organism_\DNA.cs" />
+    <Compile Include="Organism_\Organism.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="World_\World.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +96,11 @@
   <ItemGroup>
     <Content Include="Miscellaneous\Syllables.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Vita.Organism.Body_Parts
+﻿namespace Vita.Organism_.Body_Parts
 {
     public abstract class Joint
     {
