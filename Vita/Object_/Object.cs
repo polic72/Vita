@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Vita.Graphics;
 using Vita.Miscellaneous;
 
 using Stonis;
@@ -23,6 +22,11 @@ namespace Vita.Object_
         public XYZ GetVelocity()
         {
             return XYZ.Zero;
+        }
+
+        public void OnTick()
+        {
+            throw new NotImplementedException();
         }
 
         public Object(XYZ position)
