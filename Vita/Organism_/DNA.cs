@@ -20,6 +20,8 @@ namespace Vita.Organism_
         public static double MUTATION_MAGNITUDE = .1;
 
 
+        #region Genes
+
         /// <summary>
         /// The size of the organism.
         /// </summary>
@@ -29,6 +31,15 @@ namespace Vita.Organism_
         /// The speed of the organism.
         /// </summary>
         public double Speed { get; }
+
+
+        /// <summary>
+        /// The rate at which an organism can produce energy from nothing.
+        /// </summary>
+        public double Photosynthetic { get; }
+
+        #endregion Genes
+
 
         protected Random random;
 
@@ -45,7 +56,10 @@ namespace Vita.Organism_
 
             Size = random.NextDouble() * (Organism.MAX_SIZE - Organism.MIN_SIZE) + Organism.MIN_SIZE;
 
-            Speed = random.NextDouble() * 5;    //Min is 0 for plants/filter-feeders. Max is ~1 for testing.
+            //TODO make Gaussian
+            Speed = random.NextDouble() * 5;    //Min is 0 for plants/filter-feeders. Max is 5 for testing.
+
+            Photosynthetic = Math.Abs(random.NextGaussian(0, 2));   //TODO balance
         }
 
         /// <summary>
@@ -59,11 +73,13 @@ namespace Vita.Organism_
         /// </summary>
         /// <param name="size">The size to set.</param>
         /// <param name="speed">The speed to set.</param>
+        /// <param name="photosynthetic">The photosynthetic to set.</param>
         /// <param name="random">The random object to use for later.</param>
-        public DNA(double size, double speed, Random random)
+        public DNA(double size, double speed, double photosynthetic, Random random)
         {
             Size = size;
             Speed = speed;
+            Photosynthetic = photosynthetic;
 
             this.random = random;
         }
@@ -74,7 +90,8 @@ namespace Vita.Organism_
         /// </summary>
         /// <param name="size">The size to set.</param>
         /// <param name="speed">The speed to set.</param>
-        public DNA(double size, double speed) : this(size, speed, new Random()) { }
+        /// <param name="photosynthetic">The photosynthetic to set.</param>
+        public DNA(double size, double speed, double photosynthetic) : this(size, speed, photosynthetic, new Random()) { }
 
 
         /// <summary>
@@ -86,6 +103,7 @@ namespace Vita.Organism_
         {
             Size = info.GetDouble("size");
             Speed = info.GetDouble("speed");
+            Photosynthetic = info.GetDouble("photosynthetic");
         }
 
         #endregion Constructors
@@ -100,6 +118,7 @@ namespace Vita.Organism_
         {
             info.AddValue("size", Size);
             info.AddValue("speed", Speed);
+            info.AddValue("photosynthetic", Photosynthetic);
         }
 
 
@@ -111,7 +130,8 @@ namespace Vita.Organism_
         {
             if (random.NextDouble() < MUTATION_RATE)
             {
-                return new DNA(random.NextGaussian(Size, MUTATION_MAGNITUDE), random.NextGaussian(Speed, MUTATION_MAGNITUDE), random);
+                return new DNA(random.NextGaussian(Size, MUTATION_MAGNITUDE), random.NextGaussian(Speed, MUTATION_MAGNITUDE),
+                    random.NextGaussian(Photosynthetic, MUTATION_MAGNITUDE), random);
             }
             else
             {

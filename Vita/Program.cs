@@ -43,6 +43,11 @@ namespace Vita
                 Console.ReadKey(true);
 
                 Console.Clear();
+
+                if (world.GetPhysicalsInArea_Nice(XYZ.Zero, world.WorldSize_X).Where(x => x is Organism).Count() == 0)
+                {
+                    break;
+                }
             }
         }
     }

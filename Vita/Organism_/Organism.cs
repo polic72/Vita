@@ -203,8 +203,13 @@ namespace Vita.Organism_
             #endregion Death Conditions
 
 
-            #region Eat Corpses
+            #region Eat
 
+            //Light:
+            energy += (int)DNA.Photosynthetic;
+
+
+            //Corpses:
             IEnumerable<IPhysical> found = World.GetPhysicalsInAreaExcluding_Nice(position, DNA.Size, new IPhysical[] { this });
 
             foreach (IPhysical physical in found)
@@ -215,7 +220,7 @@ namespace Vita.Organism_
                 }
             }
 
-            #endregion Eat Corpses
+            #endregion Eat
 
 
             #region Move
