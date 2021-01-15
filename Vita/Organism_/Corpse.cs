@@ -29,6 +29,12 @@ namespace Vita.Organism_
         /// </summary>
         public int EnergyValue { get; }
 
+
+        /// <summary>
+        /// Whether or not this corpse is eaten.
+        /// </summary>
+        public bool IsEaten { get; protected set; }
+
         #endregion Properties
 
 
@@ -51,6 +57,15 @@ namespace Vita.Organism_
             this.size = size;
 
             EnergyValue = (int)(size * SIZE_MULTIPLIER);
+        }
+
+
+        /// <summary>
+        /// Marks this corpse as eaten. Nothing else can eat an eaten corpse.
+        /// </summary>
+        public void MarkAsEaten()
+        {
+            IsEaten = true;
         }
 
 

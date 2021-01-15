@@ -24,9 +24,10 @@ namespace Vita
 
 
             World world = new World(100, 100, 100);
+            Random DNA_random = new Random();
 
-            Organism o1 = new Organism(world, new Name(), new DNA(), XYZ.Zero, XYZ.BasisX);
-            Organism o2 = new Organism(world, new Name(), new DNA(), XYZ.Zero, XYZ.BasisY);
+            Organism o1 = new Organism(world, new Name(), new DNA(DNA_random), XYZ.Zero, XYZ.BasisX);
+            Organism o2 = new Organism(world, new Name(), new DNA(DNA_random), XYZ.Zero, XYZ.BasisY);
 
             Corpse corpse = new Corpse(world, new XYZ(4, 0, 0), 1);
 

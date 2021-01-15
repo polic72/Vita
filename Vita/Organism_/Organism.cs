@@ -117,9 +117,14 @@ namespace Vita.Organism_
         /// <param name="corpse">The corpse to eat.</param>
         public void Eat(Corpse corpse)
         {
-            World.DestroyPhysical(corpse);
+            if (!corpse.IsEaten)
+            {
+                corpse.MarkAsEaten();
 
-            energy += corpse.EnergyValue;
+                World.DestroyPhysical(corpse);
+
+                energy += corpse.EnergyValue;
+            }
         }
 
 
