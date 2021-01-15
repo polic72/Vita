@@ -75,13 +75,13 @@ namespace Vita.World_
         public bool OutOfBounds(XYZ point)
         {
             if ((point.X > WorldSize_X || point.X < -WorldSize_X)
-                && (point.Y > WorldSize_Y || point.Y < -WorldSize_Y)
-                && (point.Z > WorldSize_Z || point.Z < -WorldSize_Z))
+                || (point.Y > WorldSize_Y || point.Y < -WorldSize_Y)
+                || (point.Z > WorldSize_Z || point.Z < -WorldSize_Z))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
 

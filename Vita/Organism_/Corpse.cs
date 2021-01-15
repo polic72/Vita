@@ -90,6 +90,7 @@ namespace Vita.Organism_
         public void OnTick()
         {
             //A whole lot of nothing at the moment.
+            Console.WriteLine("Corpse: " + position + " - " + EnergyValue);
         }
     }
 }

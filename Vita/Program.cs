@@ -28,10 +28,14 @@ namespace Vita
             Organism o1 = new Organism(world, new Name(), new DNA(), XYZ.Zero, XYZ.BasisX);
             Organism o2 = new Organism(world, new Name(), new DNA(), XYZ.Zero, XYZ.BasisY);
 
+            Corpse corpse = new Corpse(world, new XYZ(4, 0, 0), 1);
+
             world.AddPhysical(o1);
             world.AddPhysical(o2);
 
-            for (int i = 0; i < 10; ++i)
+            world.AddPhysical(corpse);
+
+            for (int i = 0; i < 30; ++i)
             {
                 world.SimulateTick();
 

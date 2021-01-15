@@ -169,7 +169,7 @@ namespace Vita.Organism_
         /// </summary>
         public void OnTick()
         {
-            Console.WriteLine(Name + ": " + position + " - " + energy);
+            Console.WriteLine(Name + ": " + position + " - " + DNA.Size + " - " + energy);
 
             if (energy == 0)
             {
@@ -177,6 +177,18 @@ namespace Vita.Organism_
 
                 return;
             }
+
+
+            IEnumerable<IPhysical> found = World.GetPhysicalsInAreaExcluding_Nice(position, DNA.Size, new IPhysical[] { this });
+
+            foreach (IPhysical physical in found)
+            {
+                if (physical is Corpse corpse)
+                {
+                    Eat(corpse);
+                }
+            }
+
 
             position += direction.Project(velocity);
             energy -= (int)Math.Ceiling(velocity.GetLength());  //No free movement for you.
