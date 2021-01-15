@@ -29,6 +29,11 @@ namespace Vita.Object_
             throw new NotImplementedException();
         }
 
+        public double GetSize()
+        {
+            throw new NotImplementedException();
+        }
+
         public Object(XYZ position)
         {
             this.position = position;

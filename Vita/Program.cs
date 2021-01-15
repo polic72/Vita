@@ -25,8 +25,8 @@ namespace Vita
 
             World world = new World(100, 100, 100);
 
-            Organism o1 = new Organism(new Name(), new DNA(), XYZ.Zero, XYZ.BasisX);
-            Organism o2 = new Organism(new Name(), new DNA(), XYZ.Zero, XYZ.BasisY);
+            Organism o1 = new Organism(world, new Name(), new DNA(), XYZ.Zero, XYZ.BasisX);
+            Organism o2 = new Organism(world, new Name(), new DNA(), XYZ.Zero, XYZ.BasisY);
 
             world.AddPhysical(o1);
             world.AddPhysical(o2);

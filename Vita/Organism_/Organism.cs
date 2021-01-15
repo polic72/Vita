@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Stonis;
 
 using Vita.Miscellaneous;
+using Vita.World_;
 
 
 namespace Vita.Organism_
@@ -27,17 +28,45 @@ namespace Vita.Organism_
         /// </summary>
         public Name Name { get; }
 
+
         /// <summary>
         /// The DNA object of the organism.
         /// </summary>
         public DNA DNA { get; }
 
+
+        /// <summary>
+        /// The world that this organism belongs to.
+        /// </summary>
+        public World World { get; }
+
         #endregion Properties
 
 
+        #region Internals
+
+        /// <summary>
+        /// The position of the organism.
+        /// </summary>
         protected XYZ position;
 
+        /// <summary>
+        /// The direction the organism is facing.
+        /// </summary>
+        protected XYZ direction;
+
+        /// <summary>
+        /// The velocity of the organism. Must be the same direction as the the velocity.
+        /// </summary>
         protected XYZ velocity;
+
+
+        /// <summary>
+        /// The energy of the organism.
+        /// </summary>
+        protected int energy;
+
+        #endregion Internals
 
 
         #region Constructors
@@ -45,28 +74,65 @@ namespace Vita.Organism_
         /// <summary>
         /// Constructs an organism with the given Name, DNA, position, and velocity.
         /// </summary>
+        /// <param name="world">The world that the organism will inhabit.</param>
         /// <param name="name">The name of the organism.</param>
         /// <param name="dna">The DNA of the organism.</param>
         /// <param name="position">The position of the organism.</param>
         /// <param name="velocity">The velocity of the organism.</param>
-        public Organism(Name name, DNA dna, XYZ position, XYZ velocity)
+        public Organism(World world, Name name, DNA dna, XYZ position, XYZ velocity)
         {
+            World = world;
             Name = name;
             DNA = dna;
 
             this.position = position;
             this.velocity = velocity;
+
+            direction = velocity.Normalize();
+
+            energy = 5;
         }
 
         /// <summary>
         /// Constructs an organism with the given Name, and DNA. Zero position and velocity.
         /// </summary>
+        /// <param name="world">The world that the organism will inhabit.</param>
         /// <param name="name">The name of the organism.</param>
         /// <param name="dna">The DNA of the organism.</param>
-        public Organism(Name name, DNA dna) : this(name, dna, XYZ.Zero, XYZ.Zero) { }
+        public Organism(World world, Name name, DNA dna) : this(world, name, dna, XYZ.Zero, XYZ.Zero) { }
 
         #endregion Constructors
 
+
+        /// <summary>
+        /// Eats a corpse if it exists in the world. Adds its potential energy to the energy reserves of the organism.
+        /// </summary>
+        /// <param name="corpse">The corpse to eat.</param>
+        public void Eat(Corpse corpse)
+        {
+            World.DestroyPhysical(corpse);
+
+            energy += corpse.EnergyValue;
+        }
+
+
+        /// <summary>
+        /// Kills this organism, removing it from the world, and placing a corpse in its place.
+        /// </summary>
+        /// <returns>The corpse that was created.</returns>
+        public Corpse Die()
+        {
+            World.DestroyPhysical(this);
+
+            Corpse corpse = new Corpse(World, position, DNA.Size);
+
+            World.AddPhysical(corpse);
+
+            return corpse;
+        }
+
+
+        #region IPhysical Implementation
 
         /// <summary>
         /// The position of the organism this tick.
@@ -89,13 +155,36 @@ namespace Vita.Organism_
 
 
         /// <summary>
+        /// The size of the organism.
+        /// </summary>
+        /// <returns>The size of the organism.</returns>
+        public double GetSize()
+        {
+            return DNA.Size;
+        }
+
+
+        /// <summary>
         /// What the organism does this tick.
         /// </summary>
         public void OnTick()
         {
-            position += velocity;
+            Console.WriteLine(Name + ": " + position + " - " + energy);
 
-            Console.WriteLine(Name + ": " + position);
+            if (energy == 0)
+            {
+                Die();
+
+                return;
+            }
+
+            position += direction.Project(velocity);
+            energy -= (int)Math.Ceiling(velocity.GetLength());  //No free movement for you.
+
+            energy -= (int)Math.Ceiling(velocity.AngleTo(velocity));  //No free rotation for you.
+            direction = velocity.Normalize();
         }
+
+        #endregion IPhysical Implementation
     }
 }

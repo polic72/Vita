@@ -57,7 +57,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Stonis DLL">
-      <HintPath>..\..\Stonis DLL\Stonis DLL\bin\x64\Debug\Stonis DLL.dll</HintPath>
+      <HintPath>..\..\Stonis-DLL\Stonis DLL\bin\x64\Debug\Stonis DLL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,6 +74,7 @@
     <Compile Include="Miscellaneous\Helpers.cs" />
     <Compile Include="Miscellaneous\IPhysical.cs" />
     <Compile Include="Object_\Object.cs" />
+    <Compile Include="Organism_\Corpse.cs" />
     <Compile Include="Posibile V2\Body Parts\Body.cs" />
     <Compile Include="Posibile V2\Body Parts\Joint.cs" />
     <Compile Include="Posibile V2\Body Parts\Limb.cs" />

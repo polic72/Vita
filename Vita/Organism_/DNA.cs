@@ -5,6 +5,8 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
+using Stonis;
+
 
 namespace Vita.Organism_
 {
@@ -14,6 +16,10 @@ namespace Vita.Organism_
     [Serializable]
     public class DNA : ISerializable
     {
+        public static double MUTATION_RATE = .01;
+        public static double MUTATION_MAGNITUDE = .1;
+
+
         /// <summary>
         /// The size of the organism.
         /// </summary>
@@ -32,10 +38,10 @@ namespace Vita.Organism_
         /// <summary>
         /// Constructs a DNA object with random size and speed.
         /// </summary>
-        /// <param name="seed">The seed for the randomness.</param>
-        public DNA(int seed)
+        /// <param name="random">The random object to use.</param>
+        public DNA(Random random)
         {
-            random = new Random(seed);
+            this.random = random;
 
             Size = random.NextDouble() * (Organism.MAX_SIZE - Organism.MIN_SIZE) + Organism.MIN_SIZE;
 
@@ -45,7 +51,30 @@ namespace Vita.Organism_
         /// <summary>
         /// Constructs a DNA object with random size and speed. Random seed.
         /// </summary>
-        public DNA() : this(new Random().Next()) { }
+        public DNA() : this(new Random()) { }
+
+
+        /// <summary>
+        /// Constructs a DNA object with the given size and speed.
+        /// </summary>
+        /// <param name="size">The size to set.</param>
+        /// <param name="speed">The speed to set.</param>
+        /// <param name="random">The random object to use for later.</param>
+        public DNA(double size, double speed, Random random)
+        {
+            Size = size;
+            Speed = speed;
+
+            this.random = random;
+        }
+
+
+        /// <summary>
+        /// Constructs a DNA object with the given size and speed.
+        /// </summary>
+        /// <param name="size">The size to set.</param>
+        /// <param name="speed">The speed to set.</param>
+        public DNA(double size, double speed) : this(size, speed, new Random()) { }
 
 
         /// <summary>
@@ -71,6 +100,23 @@ namespace Vita.Organism_
         {
             info.AddValue("size", Size);
             info.AddValue("speed", Speed);
+        }
+
+
+        /// <summary>
+        /// Replicates this DNA. Has a chance to mutate based on the mutation rate and magnitude.
+        /// </summary>
+        /// <returns>This DNA object if replicated perfectly. Mutated DNA (new object) if mutated.</returns>
+        public DNA Replicate()
+        {
+            if (random.NextDouble() < MUTATION_RATE)
+            {
+                return new DNA(random.NextGaussian(Size, MUTATION_MAGNITUDE), random.NextGaussian(Speed, MUTATION_MAGNITUDE), random);
+            }
+            else
+            {
+                return this;
+            }
         }
     }
 }
