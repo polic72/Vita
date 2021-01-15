@@ -26,22 +26,26 @@ namespace Vita
             World world = new World(100, 100, 100);
             Random DNA_random = new Random();
 
-            Organism o1 = new Organism(world, new Name(), new DNA(DNA_random), XYZ.Zero, XYZ.BasisX);
-            Organism o2 = new Organism(world, new Name(), new DNA(DNA_random), XYZ.Zero, XYZ.BasisY);
+            Random pos_random = new Random();
+            
+            for (int i = 0; i < 10; ++i)
+            {
+                double x = pos_random.NextDouble() * (world.WorldSize_X - -world.WorldSize_X) + -world.WorldSize_X;
+                double y = pos_random.NextDouble() * (world.WorldSize_Y - -world.WorldSize_Y) + -world.WorldSize_Y;
+                double z = pos_random.NextDouble() * (world.WorldSize_Z - -world.WorldSize_Z) + -world.WorldSize_Z;
 
-            Corpse corpse = new Corpse(world, new XYZ(4, 0, 0), 1);
+                world.AddPhysical(new Organism(world, new Name(), new DNA(DNA_random), new XYZ(x, y, z), new XYZ(x, y, z).Normalize()));
+            }
 
-            world.AddPhysical(o1);
-            world.AddPhysical(o2);
 
-            world.AddPhysical(corpse);
-
-            for (int i = 0; i < 30; ++i)
+            while (true)
             {
                 world.SimulateTick();
 
                 Console.WriteLine();
                 Console.ReadKey(true);
+
+                Console.Clear();
             }
         }
     }

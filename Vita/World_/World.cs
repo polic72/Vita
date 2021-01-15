@@ -99,7 +99,7 @@ namespace Vita.World_
         {
             if (OutOfBounds(center))
             {
-                throw new ArgumentException("The center is out of bounds.", "center");
+                //throw new ArgumentException("The center is out of bounds.", "center");
             }
 
             if (radius <= 0)

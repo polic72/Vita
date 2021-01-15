@@ -183,13 +183,20 @@ namespace Vita.Organism_
         {
             Console.WriteLine(Name + ": " + position + " - " + DNA.Size + " - " + energy);
 
-            if (energy == 0)
+
+            #region Death Conditions
+
+            if (energy <= 0)
             {
                 Die();
 
                 return;
             }
 
+            #endregion Death Conditions
+
+
+            #region Eat Corpses
 
             IEnumerable<IPhysical> found = World.GetPhysicalsInAreaExcluding_Nice(position, DNA.Size, new IPhysical[] { this });
 
@@ -201,12 +208,18 @@ namespace Vita.Organism_
                 }
             }
 
+            #endregion Eat Corpses
+
+
+            #region Move
 
             position += direction.Project(velocity);
             energy -= (int)Math.Ceiling(velocity.GetLength());  //No free movement for you.
 
             energy -= (int)Math.Ceiling(velocity.AngleTo(velocity));  //No free rotation for you.
             direction = velocity.Normalize();
+
+            #endregion Move
         }
 
         #endregion IPhysical Implementation
