@@ -30,11 +30,8 @@ namespace Vita
             
             for (int i = 0; i < 10; ++i)
             {
-                double x = pos_random.NextDouble() * (world.WorldSize_X - -world.WorldSize_X) + -world.WorldSize_X;
-                double y = pos_random.NextDouble() * (world.WorldSize_Y - -world.WorldSize_Y) + -world.WorldSize_Y;
-                double z = pos_random.NextDouble() * (world.WorldSize_Z - -world.WorldSize_Z) + -world.WorldSize_Z;
-
-                world.AddPhysical(new Organism(world, new Name(), new DNA(DNA_random), new XYZ(x, y, z), new XYZ(x, y, z).Normalize()));
+                world.AddPhysical(new Organism(world, new Name(), new DNA(DNA_random), pos_random.NextCoordinate(-world.WorldSize_X, world.WorldSize_X), 
+                    pos_random.NextVector(), pos_random));
             }
 
 

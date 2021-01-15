@@ -75,6 +75,9 @@ namespace Vita.Organism_
         #endregion Internals
 
 
+        protected Random random;
+
+
         #region Constructors
 
         /// <summary>
@@ -85,7 +88,8 @@ namespace Vita.Organism_
         /// <param name="dna">The DNA of the organism.</param>
         /// <param name="position">The position of the organism.</param>
         /// <param name="velocity">The velocity of the organism.</param>
-        public Organism(World world, Name name, DNA dna, XYZ position, XYZ velocity)
+        /// <param name="random">The random object to use for this organism.</param>
+        public Organism(World world, Name name, DNA dna, XYZ position, XYZ velocity, Random random)
         {
             World = world;
             Name = name;
@@ -98,6 +102,8 @@ namespace Vita.Organism_
 
             energy_max = (int)Math.Ceiling(DNA.Size * Corpse.SIZE_MULTIPLIER);
             energy = energy_max;
+
+            this.random = random;
         }
 
         /// <summary>
@@ -106,7 +112,8 @@ namespace Vita.Organism_
         /// <param name="world">The world that the organism will inhabit.</param>
         /// <param name="name">The name of the organism.</param>
         /// <param name="dna">The DNA of the organism.</param>
-        public Organism(World world, Name name, DNA dna) : this(world, name, dna, XYZ.Zero, XYZ.Zero) { }
+        /// <param name="random">The random object to use for this organism.</param>
+        public Organism(World world, Name name, DNA dna, Random random) : this(world, name, dna, XYZ.Zero, XYZ.Zero, random) { }
 
         #endregion Constructors
 
@@ -216,8 +223,11 @@ namespace Vita.Organism_
             position += direction.Project(velocity);
             energy -= (int)Math.Ceiling(velocity.GetLength());  //No free movement for you.
 
-            energy -= (int)Math.Ceiling(velocity.AngleTo(velocity));  //No free rotation for you.
+            double angle = direction.AngleTo(velocity);
+            energy -= (int)Math.Ceiling(double.IsNaN(angle) ? 1 : angle);  //No free rotation for you.
             direction = velocity.Normalize();
+
+            velocity = random.NextVector() * DNA.Speed;
 
             #endregion Move
         }

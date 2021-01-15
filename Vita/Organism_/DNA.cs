@@ -45,7 +45,7 @@ namespace Vita.Organism_
 
             Size = random.NextDouble() * (Organism.MAX_SIZE - Organism.MIN_SIZE) + Organism.MIN_SIZE;
 
-            Speed = random.NextDouble();    //Min is 0 for plants/filter-feeders. Max is ~1 for testing.
+            Speed = random.NextDouble() * 5;    //Min is 0 for plants/filter-feeders. Max is ~1 for testing.
         }
 
         /// <summary>
