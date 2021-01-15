@@ -66,6 +66,12 @@ namespace Vita.Organism_
         /// </summary>
         protected int energy;
 
+
+        /// <summary>
+        /// The maximum amount of energy this organism can hold. Based on size.
+        /// </summary>
+        protected readonly int energy_max;
+
         #endregion Internals
 
 
@@ -90,7 +96,8 @@ namespace Vita.Organism_
 
             direction = velocity.Normalize();
 
-            energy = 5;
+            energy_max = (int)Math.Ceiling(DNA.Size * Corpse.SIZE_MULTIPLIER);
+            energy = energy_max;
         }
 
         /// <summary>
