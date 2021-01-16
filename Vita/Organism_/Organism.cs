@@ -156,15 +156,20 @@ namespace Vita.Organism_
         /// <returns>The cild organism.</returns>
         public virtual Organism Reproduce(XYZ child_location, XYZ child_velocity)
         {
-            Organism child = new Organism(World, Name, DNA.Replicate(), child_location, child_velocity, random);
+            if (energy >= 5)
+            {
+                Organism child = new Organism(World, Name, DNA.Replicate(), child_location, child_velocity, random);
 
-            child.energy -= child.energy_max / 2;
+                child.energy -= child.energy_max / 2;
 
-            World.AddPhysical(child);
+                World.AddPhysical(child);
 
-            energy -= energy_max / 2;
+                energy -= energy_max / 2;
 
-            return child;
+                return child;
+            }
+
+            return null;
         }
 
 
