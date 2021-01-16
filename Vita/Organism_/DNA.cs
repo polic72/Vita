@@ -128,15 +128,39 @@ namespace Vita.Organism_
         /// <returns>This DNA object if replicated perfectly. Mutated DNA (new object) if mutated.</returns>
         public DNA Replicate()
         {
+            bool any_changes = false;
+
+            double new_size = 0;
             if (random.NextDouble() < MUTATION_RATE)
             {
-                return new DNA(random.NextGaussian(Size, MUTATION_MAGNITUDE), random.NextGaussian(Speed, MUTATION_MAGNITUDE),
-                    random.NextGaussian(Photosynthetic, MUTATION_MAGNITUDE), random);
+                new_size = random.NextGaussian(Size, MUTATION_MAGNITUDE);
+
+                any_changes = true;
             }
-            else
+
+            double new_speed = 0;
+            if (random.NextDouble() < MUTATION_RATE)
             {
-                return this;
+                new_speed = random.NextGaussian(Speed, MUTATION_MAGNITUDE);
+
+                any_changes = true;
             }
+
+            double new_photosynthetic = 0;
+            if (random.NextDouble() < MUTATION_RATE)
+            {
+                new_photosynthetic = random.NextGaussian(Photosynthetic, MUTATION_MAGNITUDE);
+
+                any_changes = true;
+            }
+
+
+            if (any_changes)
+            {
+                return new DNA(new_size, new_speed, new_photosynthetic, random);
+            }
+
+            return this;
         }
     }
 }
