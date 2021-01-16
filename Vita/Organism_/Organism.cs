@@ -149,7 +149,7 @@ namespace Vita.Organism_
 
 
         /// <summary>
-        /// Reproduces this organism into the location specified. This action takes 1/3 max energy to do. Child starts at 50% energy.
+        /// Reproduces this organism into the location specified. This action takes 50% max energy to do. Child starts at 50% energy.
         /// </summary>
         /// <param name="child_location">The location to place the child.</param>
         /// <param name="child_velocity">The initial velocity of the child.</param>
@@ -162,7 +162,7 @@ namespace Vita.Organism_
 
             World.AddPhysical(child);
 
-            energy -= energy_max / 3;
+            energy -= energy_max / 2;
 
             return child;
         }
