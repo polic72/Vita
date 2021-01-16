@@ -20,4 +20,4 @@ Features marked by a + are features that will come in an upcoming update. The mo
   - *Intelligence*: Implement NEAT algorithm.
   - *Defence*: How much damage getting hit does to an attacker. Higher = lower speed.
   - *Attack*: How powerful an attack is. Higher attack = higher energy cost for attacking.
-  - *Photosynthetic*: Free energy from light. Higher photosynthetic = less health.
+  - *Photosynthetic*: Free energy from light. Higher photosynthetic = less health, = less speed.
