@@ -56,10 +56,10 @@ namespace Vita.Organism_
 
             Size = random.NextDouble() * (Organism.MAX_SIZE - Organism.MIN_SIZE) + Organism.MIN_SIZE;
 
-            //TODO make Gaussian
-            Speed = random.NextDouble() * 5;    //Min is 0 for plants/filter-feeders. Max is 5 for testing.
-
             Photosynthetic = Math.Abs(random.NextGaussian(0, 2));   //TODO balance
+
+            //TODO make Gaussian
+            Speed = random.NextDouble() * Organism.MAX_SPEED - Photosynthetic;
         }
 
         /// <summary>

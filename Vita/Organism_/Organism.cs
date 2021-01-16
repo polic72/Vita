@@ -17,8 +17,10 @@ namespace Vita.Organism_
     /// </summary>
     public class Organism : IPhysical
     {
-        public static readonly double MIN_SIZE = .1;
-        public static readonly double MAX_SIZE = 10;
+        public const double MIN_SIZE = .1;
+        public const double MAX_SIZE = 10;
+
+        public const double MAX_SPEED = 10;
 
 
         #region Properties
@@ -278,6 +280,11 @@ namespace Vita.Organism_
 
             #region Move
 
+            if (DNA.Speed.IsAlmostEqualTo(0))
+            {
+                return;
+            }
+
             next_pos += direction.Project(velocity);
 
             if (World.OutOfBounds(next_pos))    //Illegal movements are cancelled.
@@ -288,10 +295,10 @@ namespace Vita.Organism_
             position = next_pos;
 
 
-            energy -= (int)Math.Ceiling(velocity.GetLength());  //No free movement for you.
+            energy -= (int)Math.Ceiling(velocity.GetLength() + DNA.Size);  //No free movement for you.
 
             double angle = direction.AngleTo(velocity);
-            energy -= (int)Math.Ceiling(double.IsNaN(angle) ? 1 : angle);  //No free rotation for you.
+            energy -= (int)Math.Ceiling(double.IsNaN(angle) ? 1 : (angle + DNA.Size));  //No free rotation for you.
             direction = velocity.Normalize();
 
             velocity = random.NextVector() * DNA.Speed;

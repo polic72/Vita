@@ -13,7 +13,7 @@ namespace Vita.Organism_
 {
     public class Corpse : IPhysical
     {
-        public static double SIZE_MULTIPLIER { get { return 10; } }
+        public const double SIZE_MULTIPLIER = 5000;
 
 
         #region Properties
@@ -56,7 +56,7 @@ namespace Vita.Organism_
             this.position = position;
             this.size = size;
 
-            EnergyValue = (int)(size * SIZE_MULTIPLIER);
+            EnergyValue = (int)(size * SIZE_MULTIPLIER) / 2;
         }
 
 
