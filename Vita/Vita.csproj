@@ -56,8 +56,9 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Stonis DLL">
-      <HintPath>..\..\Stonis-DLL\Stonis DLL\bin\x64\Debug\Stonis DLL.dll</HintPath>
+    <Reference Include="Stonis DLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Stonis DLL\Stonis DLL\bin\x64\Debug\Stonis DLL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

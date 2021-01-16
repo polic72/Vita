@@ -126,11 +126,24 @@ namespace Vita.Organism_
         {
             if (!corpse.IsEaten)
             {
-                corpse.MarkAsEaten();
+                if (energy + corpse.EnergyValue <= energy_max)
+                {
+                    corpse.MarkAsEaten();
 
-                World.DestroyPhysical(corpse);
+                    World.DestroyPhysical(corpse);
 
-                energy += corpse.EnergyValue;
+                    energy += corpse.EnergyValue;
+                }
+                else
+                {
+                    corpse.MarkAsEaten();
+
+                    World.DestroyPhysical(corpse);
+
+                    World.AddPhysical(new Corpse(World, corpse.GetPosition(), (corpse.EnergyValue - (energy_max - energy)) / Corpse.SIZE_MULTIPLIER));
+
+                    energy = energy_max;
+                }
             }
         }
 
