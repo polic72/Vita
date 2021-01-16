@@ -28,7 +28,7 @@ namespace Vita
 
             Random pos_random = new Random();
             
-            for (int i = 0; i < 10; ++i)
+            for (int i = 0; i < 1; ++i)
             {
                 world.AddPhysical(new Organism(world, new Name(), new DNA(DNA_random), pos_random.NextCoordinate(-world.WorldSize_X, world.WorldSize_X), 
                     pos_random.NextVector(), pos_random));

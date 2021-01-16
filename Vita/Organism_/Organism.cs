@@ -122,7 +122,7 @@ namespace Vita.Organism_
         /// Eats a corpse if it exists in the world. Adds its potential energy to the energy reserves of the organism.
         /// </summary>
         /// <param name="corpse">The corpse to eat.</param>
-        public void Eat(Corpse corpse)
+        public virtual void Eat(Corpse corpse)
         {
             if (!corpse.IsEaten)
             {
@@ -149,10 +149,30 @@ namespace Vita.Organism_
 
 
         /// <summary>
+        /// Reproduces this organism into the location specified. This action takes 1/3 max energy to do. Child starts at 50% energy.
+        /// </summary>
+        /// <param name="child_location">The location to place the child.</param>
+        /// <param name="child_velocity">The initial velocity of the child.</param>
+        /// <returns>The cild organism.</returns>
+        public virtual Organism Reproduce(XYZ child_location, XYZ child_velocity)
+        {
+            Organism child = new Organism(World, Name, DNA.Replicate(), child_location, child_velocity, random);
+
+            child.energy -= child.energy_max / 2;
+
+            World.AddPhysical(child);
+
+            energy -= energy_max / 3;
+
+            return child;
+        }
+
+
+        /// <summary>
         /// Kills this organism, removing it from the world, and placing a corpse in its place.
         /// </summary>
         /// <returns>The corpse that was created.</returns>
-        public Corpse Die()
+        public virtual Corpse Die()
         {
             World.DestroyPhysical(this);
 
@@ -199,7 +219,7 @@ namespace Vita.Organism_
         /// <summary>
         /// What the organism does this tick.
         /// </summary>
-        public void OnTick()
+        public virtual void OnTick()
         {
             Console.WriteLine(Name + ": " + position + " - " + DNA.Size + " - " + energy);
 
@@ -234,6 +254,17 @@ namespace Vita.Organism_
             }
 
             #endregion Eat
+
+
+            #region Reproduce
+
+            if (energy >= (2.0 * energy_max) / 3.0)
+            {
+                //Puts baby behind itself 1.25 body-lengths away.
+                Reproduce(position + 1.25 * DNA.Size * direction.Negate(), direction.Negate());
+            }
+
+            #endregion Reproduce
 
 
             #region Move
