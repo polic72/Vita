@@ -11,7 +11,7 @@ using Vita.World_;
 
 namespace Vita.Organism_
 {
-    public class Corpse : IPhysical
+    public class Corpse : IEdible
     {
         public const double SIZE_MULTIPLIER = 5000;
 
@@ -23,24 +23,15 @@ namespace Vita.Organism_
         /// </summary>
         public World World { get; }
 
-
-        /// <summary>
-        /// The energy value this corpse is worth eating.
-        /// </summary>
-        public int EnergyValue { get; }
-
-
-        /// <summary>
-        /// Whether or not this corpse is eaten.
-        /// </summary>
-        public bool IsEaten { get; protected set; }
-
         #endregion Properties
 
 
         protected XYZ position;
 
         protected double size;
+
+        protected bool eaten;
+        protected int energyvalue;
 
 
         /// <summary>
@@ -56,7 +47,9 @@ namespace Vita.Organism_
             this.position = position;
             this.size = size;
 
-            EnergyValue = (int)(size * SIZE_MULTIPLIER) / 2;
+            eaten = false;
+
+            energyvalue = (int)(size * SIZE_MULTIPLIER) / 2;
         }
 
 
@@ -65,7 +58,27 @@ namespace Vita.Organism_
         /// </summary>
         public void MarkAsEaten()
         {
-            IsEaten = true;
+            eaten = true;
+        }
+
+
+        /// <summary>
+        /// Whether or not this corpse is eaten.
+        /// </summary>
+        /// <returns>Whether or not this corpse is eaten.</returns>
+        public bool IsEaten()
+        {
+            return eaten;
+        }
+
+
+        /// <summary>
+        /// Gets how valuable this pellet is.
+        /// </summary>
+        /// <returns>Gets how valuable this pellet is.</returns>
+        public int GetEnergyValue()
+        {
+            return energyvalue;
         }
 
 
@@ -105,7 +118,7 @@ namespace Vita.Organism_
         public void OnTick()
         {
             //A whole lot of nothing at the moment.
-            Console.WriteLine("Corpse: " + position + " - " + EnergyValue);
+            Console.WriteLine("Corpse: " + position + " - " + energyvalue);
         }
     }
 }

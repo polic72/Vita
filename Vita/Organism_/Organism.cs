@@ -125,28 +125,28 @@ namespace Vita.Organism_
 
 
         /// <summary>
-        /// Eats a corpse if it exists in the world. Adds its potential energy to the energy reserves of the organism.
+        /// Eats an edible if it exists in the world. Adds its potential energy to the energy reserves of the organism.
         /// </summary>
-        /// <param name="corpse">The corpse to eat.</param>
-        public virtual void Eat(Corpse corpse)
+        /// <param name="edible">The edible to eat.</param>
+        public virtual void Eat(IEdible edible)
         {
-            if (!corpse.IsEaten)
+            if (!edible.IsEaten())
             {
-                if (energy + corpse.EnergyValue <= energy_max)
+                if (energy + edible.GetEnergyValue() <= energy_max)
                 {
-                    corpse.MarkAsEaten();
+                    edible.MarkAsEaten();
 
-                    World.DestroyPhysical(corpse);
+                    World.DestroyPhysical(edible);
 
-                    energy += corpse.EnergyValue;
+                    energy += edible.GetEnergyValue();
                 }
                 else
                 {
-                    corpse.MarkAsEaten();
+                    edible.MarkAsEaten();
 
-                    World.DestroyPhysical(corpse);
+                    World.DestroyPhysical(edible);
 
-                    World.AddPhysical(new Corpse(World, corpse.GetPosition(), (corpse.EnergyValue - (energy_max - energy)) / Corpse.SIZE_MULTIPLIER));
+                    World.AddPhysical(new Corpse(World, edible.GetPosition(), (edible.GetEnergyValue() - (energy_max - energy)) / Corpse.SIZE_MULTIPLIER));
 
                     energy = energy_max;
                 }
