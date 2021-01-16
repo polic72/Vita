@@ -23,12 +23,12 @@ namespace Vita
             Name.Init(syllables);
 
 
-            World world = new World(100, 100, 100);
+            World world = new World(1000, 1000, 1000);
             Random DNA_random = new Random();
 
             Random pos_random = new Random();
             
-            for (int i = 0; i < 5; ++i)
+            for (int i = 0; i < 1; ++i)
             {
                 world.AddPhysical(new Organism(world, new Name(), new DNA(DNA_random), pos_random.NextCoordinate(-world.WorldSize_X, world.WorldSize_X), 
                     pos_random.NextVector(), pos_random));
@@ -42,7 +42,7 @@ namespace Vita
                 Console.WriteLine();
                 Console.ReadKey(true);
 
-                if (world.GetPhysicalsInArea_Nice(XYZ.Zero, world.WorldSize_X).Where(x => x is Organism).Count() == 0)
+                if (world.GetPhysicalsInArea_Nice(XYZ.Zero, 2 * world.WorldSize_X).Where(x => x is Organism).Count() == 0)
                 {
                     break;
                 }

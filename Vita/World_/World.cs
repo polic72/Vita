@@ -215,6 +215,11 @@ namespace Vita.World_
 
             foreach (IPhysical physical in physicals)
             {
+                if (OutOfBounds(physical.GetPosition()))
+                {
+                    DestroyPhysical(physical);  //No continue, you get 1 last tick to live.
+                }
+
                 physical.OnTick();
             }
         }
