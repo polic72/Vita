@@ -17,3 +17,6 @@ Features marked by a + are features that will come in an upcoming update. The mo
   - ++*Temperature*: Has min and max limits. Moving increases temp, staying still decreases. Too low = slower speeds, lowers health. Too high = higher energy costs of everything, higher water costs, lowers health.
   - +++*Mating*: Find another member of the same species and produce new offspring with them.
   - +*Corpse*: What’s left of an organism after they die. Can be a source of food, based on size.
+  - *Intelligence*: Implement NEAT algorithm.
+  - *Defence*: How much damage getting hit does to an attacker. Higher = lower speed.
+  - *Attack*: How powerful an attack is. Higher attack = higher energy cost for attacking.
